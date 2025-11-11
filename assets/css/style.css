@@ -1,0 +1,741 @@
+/* =================================================================
+   1. GLOBAL STYLES & VARIABLES
+   ================================================================= */
+
+/* Define the color palette for the entire site. Changing a color here will update it everywhere. */
+:root {
+    --background-color: #1a1a2e; /* Deep space blue */
+    --primary-color: #e94560; /* Vibrant pink/red for accents */
+    --secondary-color: #0f3460; /* A slightly lighter blue for cards */
+    --accent-color: #fca311; /* Bright orange for CTA buttons */
+    --text-color: #e4e4e4; /* Light grey for text */
+    --heading-color: #ffffff; /* Pure white for headings */
+}
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* =================================================================
+   2. HEADER & NAVIGATION
+   ================================================================= */
+
+.main-header {
+    padding: 1rem 5%;
+    background-color: rgba(15, 52, 96, 0.3); /* Semi-transparent background */
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    border-bottom: 1px solid var(--secondary-color);
+    position: sticky;
+    top: 0;
+    z-index: 1100; /* Keep header above the sliding mobile nav */
+}
+
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative; /* Anchor dropdown to this nav */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--heading-color);
+}
+.logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.nav-login {
+    color: var(--primary-color);
+}
+
+/* =================================================================
+   3. HERO SECTION
+   ================================================================= */
+
+.hero-section {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 5%;
+    background-image: url('../images/hero-background.png');
+    background-size: cover;
+    background-position: center;
+
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    color: var(--heading-color);
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: #111;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cta-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(252, 163, 17, 0.2);
+}
+
+/* =================================================================
+   4. GENERAL SECTION STYLING
+   ================================================================= */
+
+.how-it-works-section,
+.features-section,
+.cta-section {
+    padding: 6rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+h2 {
+    font-size: 2.5rem;
+    color: var(--heading-color);
+    margin-bottom: 3rem;
+}
+
+/* =================================================================
+   5. HOW IT WORKS & FEATURES SECTIONS
+   ================================================================= */
+
+.steps-container,
+.features-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+}
+
+.step,
+.feature-item {
+    background-color: var(--secondary-color);
+    padding: 2rem;
+    border-radius: 10px;
+    border: 1px solid #0f3460;
+    flex: 1;
+}
+
+.step-icon,
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+    color: var(--heading-color);
+    margin-bottom: 0.5rem;
+}
+
+h4 {
+    font-size: 1.3rem;
+    color: var(--heading-color);
+    margin-bottom: 0.5rem;
+}
+
+/* =================================================================
+   6. FOOTER
+   ================================================================= */
+
+.main-footer {
+    background-color: #0f3460;
+    padding: 2rem 5%;
+    text-align: center;
+    border-top: 1px solid var(--secondary-color);
+}
+
+/* =================================================================
+   7. RESPONSIVENESS (for mobile devices)
+   ================================================================= */
+
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .steps-container,
+    .features-container {
+        flex-direction: column; /* Stack items vertically on small screens */
+    }
+
+}
+
+/* =================================================================
+   8. DASHBOARD SPECIFIC STYLES
+   ================================================================= */
+
+.dashboard-container {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem 5%;
+    max-width: 1600px;
+    margin: 0 auto;
+    align-items: flex-start; /* Align items to the top */
+}
+
+/* =================================================================
+   9. CONTROL PANEL (LEFT SIDE)
+   ================================================================= */
+
+#control-panel {
+    flex: 1; /* Takes up 1 part of the space */
+    max-width: 400px;
+    background-color: var(--secondary-color);
+    padding: 2rem;
+    border-radius: 10px;
+    height: fit-content; /* Panel only as tall as its content */
+}
+
+#control-panel h2 {
+    font-size: 1.8rem;
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+.control-group {
+    margin-bottom: 2.5rem;
+}
+
+.control-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--heading-color);
+}
+
+.control-group input[type="text"] {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #0f3460;
+    background-color: var(--background-color);
+    border-radius: 5px;
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+}
+
+.info-text {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    opacity: 0.7;
+}
+
+.button-group {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.button-group button {
+    flex-grow: 1;
+    padding: 0.7rem;
+    border: 1px solid #0f3460;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.button-group button:hover {
+    background-color: #0f3460;
+}
+
+.button-group button.active {
+    background-color: var(--primary-color);
+    color: var(--heading-color);
+    border-color: var(--primary-color);
+}
+
+/* Make the main predict button full width */
+#predict-btn {
+    width: 100%;
+}
+
+
+/* =================================================================
+   10. VISUALIZATION PANEL (RIGHT SIDE)
+   ================================================================= */
+
+#visualization-panel {
+    flex: 3; /* Takes up 3 parts of the space, making it larger */
+    position: relative; /* Needed to position the results card inside it */
+}
+
+#map {
+    width: 100%;
+    height: 700px; /* Define a fixed height for the map */
+    border-radius: 10px;
+    background-color: #000; /* Placeholder color */
+}
+
+#results-card {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(15, 52, 96, 0.8); /* Semi-transparent */
+    backdrop-filter: blur(10px);
+    padding: 1.5rem;
+    border-radius: 10px;
+    z-index: 1000; /* Ensures it's on top of the map */
+    width: 300px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    border: 1px solid var(--secondary-color);
+}
+
+#results-card.hidden {
+    display: none; /* This class will be used by JS to hide/show the card */
+}
+
+#results-card h3 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+/* =================================================================
+   11. DASHBOARD RESPONSIVENESS
+   ================================================================= */
+
+@media (max-width: 1024px) {
+    .dashboard-container {
+        flex-direction: column; /* Stack panels on top of each other */
+    }
+
+    #control-panel {
+        max-width: 100%; /* Allow control panel to take full width */
+        width: 100%;
+    }
+}
+
+
+/* =================================================================
+   12. METHODOLOGY PAGE STYLES
+   ================================================================= */
+
+/* A simple hero style for internal pages like this one */
+.page-hero {
+    padding: 4rem 5%;
+    text-align: center;
+    background: linear-gradient(rgba(15, 52, 96, 0.5), rgba(26, 26, 46, 0.7));
+    border-bottom: 1px solid var(--secondary-color);
+}
+
+.page-hero h1 {
+    font-size: 2.8rem;
+    color: var(--heading-color);
+}
+
+.page-hero p {
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 1rem auto 0 auto;
+}
+
+/* A standard container for content sections */
+.content-section {
+    padding: 4rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.content-section .section-intro {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+
+/* Styling for the three model description cards */
+.models-container {
+    display: flex;
+    gap: 2rem;
+    margin-top: 3rem;
+    text-align: left;
+}
+
+.model-card {
+    flex: 1;
+    background-color: var(--secondary-color);
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+.model-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.model-card h3 {
+    font-size: 1.4rem;
+    color: var(--heading-color);
+    margin-bottom: 1rem;
+}
+
+/* Styling for the process flowchart */
+.flowchart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* Allows steps to wrap onto the next line on smaller screens */
+    gap: 1rem;
+    margin-top: 3rem;
+}
+
+.flow-step {
+    background-color: var(--secondary-color);
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+}
+
+.flow-arrow {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+
+/* =================================================================
+   13. METHODOLOGY RESPONSIVENESS
+   ================================================================= */
+
+@media (max-width: 768px) {
+    /* Stack the model cards vertically on mobile */
+    .models-container {
+        flex-direction: column;
+    }
+
+    /* Hide the arrows on mobile for a cleaner vertical list */
+    .flow-arrow {
+        display: none;
+    }
+}
+
+/* =================================================================
+   14. HAMBURGER MENU STYLES
+   ================================================================= */
+
+.hamburger {
+    display: none; /* Hidden by default on desktop */
+    cursor: pointer;
+}
+
+.hamburger .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: var(--heading-color);
+    transition: all 0.3s ease-in-out;
+}
+
+/* We update the mobile responsive section */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block; /* Show the hamburger on mobile */
+    }
+
+    .nav-links {
+        /* Keep the nav visible in flow but positioned off-screen initially so it can slide in.
+           Use flex so links stack vertically (we set flex-direction below). */
+        display: flex;
+        flex-direction: column;
+                position: absolute;
+                /* Position the dropdown directly under the nav bar inside the header area */
+                top: 100%; /* directly below the nav container */
+                right: 0;
+                left: 0;
+                background-color: var(--secondary-color);
+                width: 100%;
+                text-align: center;
+          /* Hide off-screen by default using transform; this is more reliable than moving right/left
+              when the element spans full width. Also prevent interaction when hidden. */
+        transform: translateY(-10px) scaleY(0.98);
+        transform-origin: top center;
+        transition: transform 0.25s ease-in-out, visibility 0.25s ease-in-out;
+        visibility: hidden;
+        pointer-events: none;
+        z-index: 1000; /* Below header (1100) but above page content */
+    }
+
+    .nav-links li {
+        margin: 1.5rem 0;
+    }
+
+    .nav-links.nav-active {
+        transform: translateY(0) scaleY(1); /* Drop the menu in when active */
+        visibility: visible;
+        pointer-events: auto;
+        z-index: 1000; /* Keep it below header but above page content */
+    }
+}
+
+/* =================================================================
+   16. MODEL SELECTION PAGE STYLES
+   ================================================================= */
+
+.selection-grid {
+    display: grid;
+    /* Create 3 columns, each of equal width */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 2rem;
+    padding: 3rem 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.model-select-card {
+    background-color: var(--secondary-color);
+    border: 1px solid #0f3460;
+    border-radius: 10px;
+    padding: 2.5rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.model-select-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.model-select-card i {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.model-select-card h3 {
+    font-size: 1.6rem;
+    color: var(--heading-color);
+    margin-bottom: 0.5rem;
+}
+
+.model-select-card h4 {
+    font-size: 1rem;
+    color: var(--accent-color);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    min-height: 40px; /* Ensures cards are aligned */
+}
+
+.model-select-card p {
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+    min-height: 100px; /* Ensures cards are aligned */
+}
+
+.select-btn {
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    color: var(--heading-color);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.select-btn:hover {
+    background-color: #e94560; /* A slightly lighter shade */
+}
+
+/* Responsive styles for the grid */
+@media (max-width: 1024px) {
+    .selection-grid {
+        /* 2 columns on tablets */
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .selection-grid {
+        /* 1 column on mobile */
+        grid-template-columns: 1fr;
+    }
+
+    .model-select-card h4,
+    .model-select-card p {
+        /* Remove fixed heights on mobile */
+        min-height: 0;
+    }
+}
+
+/* =================================================================
+   17. EXPERT DASHBOARD STYLES
+   ================================================================= */
+
+/* This container will hold our dynamic map or charts */
+#dynamic-viz-container {
+    width: 100%;
+    height: 700px;
+    border-radius: 10px;
+    background-color: #0f3460; /* Placeholder background */
+}
+
+/* This will be the new container for our dynamic charts */
+/* We'll create the <canvas> element inside this with JS */
+#chart-container {
+    padding: 1rem;
+    height: 100%;
+}
+
+/* A simple class to hide/show the main predict button */
+.hidden {
+    display: none;
+}
+
+/* =================================================================
+   18. EXPERT MAP FIX
+   ================================================================= */
+
+/* We need to give our new map container a height */
+#expert-map {
+    width: 100%;
+    height: 700px; /* This is the missing line! */
+    border-radius: 10px;
+    background-color: #000; /* Placeholder color */
+}
+
+/* =================================================================
+   19. EXPERT DASHBOARD RESULTS CARD FIX
+   ================================================================= */
+
+/* We make the main visualization container 'relative'
+   so the results card can be positioned 'absolute' inside it.
+*/
+#dynamic-viz-container {
+    position: relative;
+}
+
+/* These are the styles for our expert results card.
+   This is the code that was missing.
+*/
+#expert-results-card {
+    position: absolute; /* This is the most important rule */
+    top: 20px;
+    right: 20px;
+    background-color: rgba(15, 52, 96, 0.8); /* Semi-transparent */
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    padding: 1.5rem;
+    border-radius: 10px;
+    z-index: 1000; /* Ensures it's on top of the map */
+    width: 300px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    border: 1px solid var(--secondary-color);
+}
+
+/* This is the class our JS uses to hide/show the card */
+#expert-results-card.hidden {
+    display: none; 
+}
+
+/* =================================================================
+   20. MODEL CARD BACKGROUND IMAGES
+   ================================================================= */
+
+.model-select-card {
+    /* This makes the gradient overlay work */
+    position: relative; 
+    z-index: 1;
+
+    /* These 2 lines make the image fit the card */
+    background-size: cover;
+    background-position: center;
+}
+
+.model-select-card::before {
+    /* This is the dark, semi-transparent overlay */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(15, 52, 96, 0.7); /* Our dark blue, 70% transparent */
+    border-radius: 10px; /* Match the card's border-radius */
+    z-index: -1; /* Sits *behind* the text but *on top of* the background image */
+}
+
+/* Now, we assign each card its unique image.
+  We use the [data-model] attribute we already set up!
+*/
+
+[data-model="xgboost"] {
+    background-image: url('../images/xgboost-bg.png');
+}
+
+[data-model="lstm"] {
+    background-image: url('../images/lstm-bg.png');
+}
+
+[data-model="catboost"] {
+    background-image: url('../images/catboost-bg.png');
+}
+
+[data-model="randomforest"] {
+    background-image: url('../images/randomforest-bg.png');
+}
+
+[data-model="kmeans"] {
+    background-image: url('../images/kmeans-bg.png');
+}
+
+[data-model="hybrid"] {
+    background-image: url('../images/hybrid-bg.png');
+}

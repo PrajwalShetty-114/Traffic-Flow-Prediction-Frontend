@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Expert Dashboard | TrafficFlow AI</title>
+    
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <nav class="main-nav">
+            <div class="logo">
+                <img src="assets/images/logo.png" alt="TrafficFlow AI Logo">
+                <span>TrafficFlow AI</span>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="dashboard.html">Prediction Dashboard</a></li>
+                <li><a href="modelSelection.html">Select Model</a></li> 
+                <li><a href="index.html#how-it-works">How It Works</a></li>
+                <li><a href="methodology.html">About Us</a></li>
+                <li><a href="#" class="nav-login">Login</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="dashboard-container">
+
+            <section id="control-panel">
+                <h2 id="control-panel-title">Loading Expert Model...</h2>
+                
+                <div id="dynamic-form-container">
+                    </div>
+                
+                <button id="expert-predict-btn" class="cta-button hidden">Generate Prediction</button>
+            </section>
+
+            <section id="visualization-panel">
+                <div id="dynamic-viz-container">
+                    </div>
+            </section>
+
+        </div>
+    </main>
+    
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p>&copy; 2025 TrafficFlow AI. All rights reserved.</p>
+            <p>A project by You & Gemini. Built with ❤️ in India.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="assets/js/main.js"></script>
+
+    <script src="assets/js/expert-dashboard.js"></script>
+</body>
+</html>
