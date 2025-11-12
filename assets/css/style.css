@@ -1,16 +1,48 @@
 /* =================================================================
+   0. THEME VARIABLES
+   ================================================================= */
+
+/* Default: Light Theme */
+body[data-theme='light'] {
+    --background-color: #f0f2f5;
+    /* Light grey background */
+    --primary-color: #e94560;
+    /* Vibrant pink/red (stays the same) */
+    --secondary-color: #ffffff;
+    /* White cards */
+    --accent-color: #fca311;
+    /* Bright orange (stays the same) */
+    --text-color: #333333;
+    /* Dark grey text */
+    --heading-color: #1a1a2e;
+    /* Deep blue headings */
+    --nav-background-color: rgba(255, 255, 255, 0.7);
+    /* Semi-transparent white */
+    --map-bg: #e0e0e0;
+    /* Light placeholder for map */
+}
+
+/* Dark Theme */
+/* Dark Theme */
+body[data-theme='dark'] {
+    --background-color: #000000;
+    /* <-- CHANGED to solid black */
+    --primary-color: #e94560;
+    --secondary-color: #1a1a1a;
+    /* <-- CHANGED to dark grey for cards */
+    --accent-color: #fca311;
+    --text-color: #e4e4e4;
+    --heading-color: #ffffff;
+    --nav-background-color: rgba(10, 10, 10, 0.3);
+    /* <-- CHANGED to be less blue */
+    --map-bg: #000;
+}
+
+/* =================================================================
    1. GLOBAL STYLES & VARIABLES
    ================================================================= */
 
 /* Define the color palette for the entire site. Changing a color here will update it everywhere. */
-:root {
-    --background-color: #1a1a2e; /* Deep space blue */
-    --primary-color: #e94560; /* Vibrant pink/red for accents */
-    --secondary-color: #0f3460; /* A slightly lighter blue for cards */
-    --accent-color: #fca311; /* Bright orange for CTA buttons */
-    --text-color: #e4e4e4; /* Light grey for text */
-    --heading-color: #ffffff; /* Pure white for headings */
-}
 
 /* Basic Reset */
 * {
@@ -32,12 +64,15 @@ body {
 
 .main-header {
     padding: 1rem 5%;
-    background-color: rgba(15, 52, 96, 0.3); /* Semi-transparent background */
-    backdrop-filter: blur(10px); /* Frosted glass effect */
+    background-color: var(--nav-background-color);
+    /* background-color: rgba(15, 52, 96, 0.3); Semi-transparent background */
+    backdrop-filter: blur(10px);
+    /* Frosted glass effect */
     border-bottom: 1px solid var(--secondary-color);
     position: sticky;
     top: 0;
-    z-index: 1100; /* Keep header above the sliding mobile nav */
+    z-index: 1100;
+    /* Keep header above the sliding mobile nav */
 }
 
 .main-nav {
@@ -46,7 +81,8 @@ body {
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
-    position: relative; /* Anchor dropdown to this nav */
+    position: relative;
+    /* Anchor dropdown to this nav */
 }
 
 .logo {
@@ -56,6 +92,7 @@ body {
     font-weight: 700;
     color: var(--heading-color);
 }
+
 .logo img {
     height: 40px;
     margin-right: 10px;
@@ -75,6 +112,65 @@ body {
     color: var(--text-color);
     font-weight: 600;
     transition: color 0.3s ease;
+}
+
+/* --- Styles for the Theme Toggle --- */
+.theme-switch-container {
+    margin-left: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    /* Width of the switch */
+    height: 28px;
+    /* Height of the switch */
+}
+
+/* Hide the default checkbox */
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider track */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 28px;
+}
+
+/* The slider knob */
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+/* --- Styles for when it's toggled ON (Dark Mode) --- */
+input:checked+.slider {
+    background-color: var(--primary-color);
+}
+
+input:checked+.slider:before {
+    transform: translateX(22px);
+    /* Moves the knob to the right */
 }
 
 .nav-links a:hover,
@@ -103,12 +199,14 @@ body {
     font-size: 3.5rem;
     color: var(--heading-color);
     margin-bottom: 1rem;
+    color: whitesmoke;
 }
 
 .hero-content p {
     font-size: 1.2rem;
     max-width: 600px;
     margin: 0 auto 2rem auto;
+    color: whitesmoke;
 }
 
 .cta-button {
@@ -193,6 +291,7 @@ h4 {
     background-color: #0f3460;
     padding: 2rem 5%;
     text-align: center;
+    color: white;
     border-top: 1px solid var(--secondary-color);
 }
 
@@ -207,7 +306,8 @@ h4 {
 
     .steps-container,
     .features-container {
-        flex-direction: column; /* Stack items vertically on small screens */
+        flex-direction: column;
+        /* Stack items vertically on small screens */
     }
 
 }
@@ -222,7 +322,8 @@ h4 {
     padding: 2rem 5%;
     max-width: 1600px;
     margin: 0 auto;
-    align-items: flex-start; /* Align items to the top */
+    align-items: flex-start;
+    /* Align items to the top */
 }
 
 /* =================================================================
@@ -230,12 +331,14 @@ h4 {
    ================================================================= */
 
 #control-panel {
-    flex: 1; /* Takes up 1 part of the space */
+    flex: 1;
+    /* Takes up 1 part of the space */
     max-width: 400px;
     background-color: var(--secondary-color);
     padding: 2rem;
     border-radius: 10px;
-    height: fit-content; /* Panel only as tall as its content */
+    height: fit-content;
+    /* Panel only as tall as its content */
 }
 
 #control-panel h2 {
@@ -312,33 +415,40 @@ h4 {
    ================================================================= */
 
 #visualization-panel {
-    flex: 3; /* Takes up 3 parts of the space, making it larger */
-    position: relative; /* Needed to position the results card inside it */
+    flex: 3;
+    /* Takes up 3 parts of the space, making it larger */
+    position: relative;
+    /* Needed to position the results card inside it */
 }
 
 #map {
     width: 100%;
-    height: 700px; /* Define a fixed height for the map */
+    height: 700px;
+    /* Define a fixed height for the map */
     border-radius: 10px;
-    background-color: #000; /* Placeholder color */
+    background-color: var(--map-bg);
+    /* Placeholder color */
 }
 
 #results-card {
     position: absolute;
     top: 20px;
     right: 20px;
-    background-color: rgba(15, 52, 96, 0.8); /* Semi-transparent */
+    background-color: rgba(15, 52, 96, 0.8);
+    /* Semi-transparent */
     backdrop-filter: blur(10px);
     padding: 1.5rem;
     border-radius: 10px;
-    z-index: 1000; /* Ensures it's on top of the map */
+    z-index: 1000;
+    /* Ensures it's on top of the map */
     width: 300px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     border: 1px solid var(--secondary-color);
 }
 
 #results-card.hidden {
-    display: none; /* This class will be used by JS to hide/show the card */
+    display: none;
+    /* This class will be used by JS to hide/show the card */
 }
 
 #results-card h3 {
@@ -352,11 +462,13 @@ h4 {
 
 @media (max-width: 1024px) {
     .dashboard-container {
-        flex-direction: column; /* Stack panels on top of each other */
+        flex-direction: column;
+        /* Stack panels on top of each other */
     }
 
     #control-panel {
-        max-width: 100%; /* Allow control panel to take full width */
+        max-width: 100%;
+        /* Allow control panel to take full width */
         width: 100%;
     }
 }
@@ -431,7 +543,8 @@ h4 {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap; /* Allows steps to wrap onto the next line on smaller screens */
+    flex-wrap: wrap;
+    /* Allows steps to wrap onto the next line on smaller screens */
     gap: 1rem;
     margin-top: 3rem;
 }
@@ -454,6 +567,7 @@ h4 {
    ================================================================= */
 
 @media (max-width: 768px) {
+
     /* Stack the model cards vertically on mobile */
     .models-container {
         flex-direction: column;
@@ -470,7 +584,8 @@ h4 {
    ================================================================= */
 
 .hamburger {
-    display: none; /* Hidden by default on desktop */
+    display: none;
+    /* Hidden by default on desktop */
     cursor: pointer;
 }
 
@@ -486,7 +601,8 @@ h4 {
 /* We update the mobile responsive section */
 @media (max-width: 768px) {
     .hamburger {
-        display: block; /* Show the hamburger on mobile */
+        display: block;
+        /* Show the hamburger on mobile */
     }
 
     .nav-links {
@@ -494,22 +610,24 @@ h4 {
            Use flex so links stack vertically (we set flex-direction below). */
         display: flex;
         flex-direction: column;
-                position: absolute;
-                /* Position the dropdown directly under the nav bar inside the header area */
-                top: 100%; /* directly below the nav container */
-                right: 0;
-                left: 0;
-                background-color: var(--secondary-color);
-                width: 100%;
-                text-align: center;
-          /* Hide off-screen by default using transform; this is more reliable than moving right/left
+        position: absolute;
+        /* Position the dropdown directly under the nav bar inside the header area */
+        top: 100%;
+        /* directly below the nav container */
+        right: 0;
+        left: 0;
+        background-color: var(--secondary-color);
+        width: 100%;
+        text-align: center;
+        /* Hide off-screen by default using transform; this is more reliable than moving right/left
               when the element spans full width. Also prevent interaction when hidden. */
         transform: translateY(-10px) scaleY(0.98);
         transform-origin: top center;
         transition: transform 0.25s ease-in-out, visibility 0.25s ease-in-out;
         visibility: hidden;
         pointer-events: none;
-        z-index: 1000; /* Below header (1100) but above page content */
+        z-index: 1000;
+        /* Below header (1100) but above page content */
     }
 
     .nav-links li {
@@ -517,66 +635,141 @@ h4 {
     }
 
     .nav-links.nav-active {
-        transform: translateY(0) scaleY(1); /* Drop the menu in when active */
+        transform: translateY(0) scaleY(1);
+        /* Drop the menu in when active */
         visibility: visible;
         pointer-events: auto;
-        z-index: 1000; /* Keep it below header but above page content */
+        z-index: 1000;
+        /* Keep it below header but above page content */
     }
 }
 
 /* =================================================================
    16. MODEL SELECTION PAGE STYLES
    ================================================================= */
-
 .selection-grid {
     display: grid;
-    /* Create 3 columns, each of equal width */
-    grid-template-columns: repeat(3, 1fr); 
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     padding: 3rem 5%;
     max-width: 1400px;
     margin: 0 auto;
 }
 
-.model-select-card {
-    background-color: var(--secondary-color);
-    border: 1px solid #0f3460;
+/* This is the main card container */
+.model-card-wrapper {
+    position: relative;
+    /* This is the key */
     border-radius: 10px;
-    padding: 2.5rem;
-    text-align: center;
+    overflow: hidden;
+    /* Clips the image to the card shape */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    /* Set a fixed aspect ratio for uniformity */
+    aspect-ratio: 3 / 4;
 }
 
-.model-select-card:hover {
+.model-card-wrapper:hover {
     transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
 }
 
-.model-select-card i {
-    font-size: 3rem;
-    color: var(--primary-color);
-    margin-bottom: 1.5rem;
+/* This is the background image */
+.card-bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Makes the image cover the card */
+    z-index: 1;
+    /* Sits at the very back */
+    transition: transform 0.4s ease;
+
+    /* Start with image slightly faded */
+    opacity: 0.8;
 }
 
-.model-select-card h3 {
+.model-card-wrapper:hover .card-bg-image {
+    transform: scale(1.1);
+    /* Nice zoom-on-hover effect */
+    opacity: 1.0;
+    /* Fully visible on hover */
+}
+
+/* This is the semi-transparent content overlay */
+.model-card-content {
+    position: relative;
+    z-index: 2;
+    /* Sits on top of the image */
+    padding: 1.5rem;
+    /* Reduced padding for more space */
+    text-align: center;
+    height: 100%;
+    /* Make sure it fills the card */
+
+    /* Create a gradient overlay: more transparent at top, darker at bottom */
+    background: linear-gradient(to bottom,
+            rgba(10, 10, 10, 0.8) 0%,
+            /* 40% black at top */
+            rgba(10, 10, 10, 0.4) 100%
+            /* 90% black at bottom */
+        );
+
+    /* Add a backdrop filter for the "frosted glass" look on content */
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+
+    /* Force text to be readable (always light) */
+    --heading-color: #ffffff;
+    /* Override theme for cards */
+    --text-color: #e4e4e4;
+    /* Override theme for cards */
+
+    /* Flexbox to push button to the bottom */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    /* Pushes content to bottom */
+}
+
+/* Placeholder for Lottie animations */
+.lottie-icon {
+    width: 100%;
+    height: 100px;
+    /* Give it a fixed height */
+    margin-bottom: 1rem;
+    flex-grow: 1;
+    /* This pushes all text/button to bottom */
+}
+
+/* --- Readability Fixes (using the overridden colors) --- */
+.model-card-content h3 {
     font-size: 1.6rem;
     color: var(--heading-color);
+    /* Always white */
     margin-bottom: 0.5rem;
 }
 
-.model-select-card h4 {
+.model-card-content h4 {
     font-size: 1rem;
     color: var(--accent-color);
+    /* Always orange */
     font-weight: 600;
     margin-bottom: 1rem;
-    min-height: 40px; /* Ensures cards are aligned */
 }
 
-.model-select-card p {
-    font-size: 0.95rem;
-    margin-bottom: 2rem;
-    min-height: 100px; /* Ensures cards are aligned */
+.model-card-content p {
+    font-size: 0.9rem;
+    /* Slightly smaller text */
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    /* Always light grey */
+    flex-grow: 0;
+    /* Don't let paragraph grow */
 }
+
 
 .select-btn {
     width: 100%;
@@ -592,7 +785,84 @@ h4 {
 }
 
 .select-btn:hover {
-    background-color: #e94560; /* A slightly lighter shade */
+    background-color: #e94560;
+    /* A slightly lighter shade */
+}
+
+/* --- Styles for the unique model buttons --- */
+.select-btn {
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    /* Default color */
+    color: var(--heading-color);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.select-btn:hover {
+    transform: scale(1.03);
+    /* Add a slight grow effect */
+}
+
+/* --- Unique Button Colors --- */
+
+.btn-xgboost {
+    background-color: #4A90E2;
+    /* Bright Blue */
+}
+
+.btn-xgboost:hover {
+    background-color: #5aa0f2;
+}
+
+.btn-lstm {
+    background-color: #50E3C2;
+    /* Teal/Mint Green */
+}
+
+.btn-lstm:hover {
+    background-color: #61f3d2;
+}
+
+.btn-catboost {
+    background-color: #BD10E0;
+    /* Vibrant Purple */
+}
+
+.btn-catboost:hover {
+    background-color: #ca2feA;
+}
+
+.btn-randomforest {
+    background-color: #7ED321;
+    /* Leaf Green */
+}
+
+.btn-randomforest:hover {
+    background-color: #8fe331;
+}
+
+.btn-kmeans {
+    background-color: #F5A623;
+    /* Orange/Gold */
+}
+
+.btn-kmeans:hover {
+    background-color: #f6b633;
+}
+
+.btn-hybrid {
+    background-color: #D0021B;
+    /* Strong Red */
+}
+
+.btn-hybrid:hover {
+    background-color: #e0122b;
 }
 
 /* Responsive styles for the grid */
@@ -625,7 +895,8 @@ h4 {
     width: 100%;
     height: 700px;
     border-radius: 10px;
-    background-color: #0f3460; /* Placeholder background */
+    background-color: #0f3460;
+    /* Placeholder background */
 }
 
 /* This will be the new container for our dynamic charts */
@@ -647,9 +918,11 @@ h4 {
 /* We need to give our new map container a height */
 #expert-map {
     width: 100%;
-    height: 700px; /* This is the missing line! */
+    height: 700px;
+    /* This is the missing line! */
     border-radius: 10px;
-    background-color: #000; /* Placeholder color */
+    background-color: var(--map-bg);
+    /* Placeholder color */
 }
 
 /* =================================================================
@@ -667,55 +940,62 @@ h4 {
    This is the code that was missing.
 */
 #expert-results-card {
-    position: absolute; /* This is the most important rule */
+    position: absolute;
+    /* This is the most important rule */
     top: 20px;
     right: 20px;
-    background-color: rgba(15, 52, 96, 0.8); /* Semi-transparent */
-    backdrop-filter: blur(10px); /* Frosted glass effect */
+    background-color: rgba(15, 52, 96, 0.8);
+    /* Semi-transparent */
+    backdrop-filter: blur(10px);
+    /* Frosted glass effect */
     padding: 1.5rem;
     border-radius: 10px;
-    z-index: 1000; /* Ensures it's on top of the map */
+    z-index: 1000;
+    /* Ensures it's on top of the map */
     width: 300px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     border: 1px solid var(--secondary-color);
 }
 
 /* This is the class our JS uses to hide/show the card */
 #expert-results-card.hidden {
-    display: none; 
+    display: none;
 }
 
 /* =================================================================
    20. MODEL CARD BACKGROUND IMAGES
    ================================================================= */
 
-.model-select-card {
+/* .model-select-card {
     /* This makes the gradient overlay work */
-    position: relative; 
-    z-index: 1;
+    /* position: relative; */
+    /* z-index: 1; */
 
     /* These 2 lines make the image fit the card */
-    background-size: cover;
-    background-position: center;
-}
+    /* background-size: cover; */
+    /* background-position: center; */
+/* } */
 
-.model-select-card::before {
+/* .model-select-card::before { */
     /* This is the dark, semi-transparent overlay */
-    content: '';
-    position: absolute;
+    /* content: ''; */
+    /* position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(15, 52, 96, 0.7); /* Our dark blue, 70% transparent */
-    border-radius: 10px; /* Match the card's border-radius */
-    z-index: -1; /* Sits *behind* the text but *on top of* the background image */
-}
+    background-color: rgba(15, 52, 96, 0.7); */
+    /* Our dark blue, 70% transparent */
+    /* border-radius: 10px; */
+    /* Match the card's border-radius */
+    /* z-index: -1; */
+    /* Sits *behind* the text but *on top of* the background image */
+/* } */
 
 /* Now, we assign each card its unique image.
   We use the [data-model] attribute we already set up!
 */
-
+/*
 [data-model="xgboost"] {
     background-image: url('../images/xgboost-bg.png');
 }
@@ -738,4 +1018,4 @@ h4 {
 
 [data-model="hybrid"] {
     background-image: url('../images/hybrid-bg.png');
-}
+} */

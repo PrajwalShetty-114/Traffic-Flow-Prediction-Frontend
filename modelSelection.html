@@ -31,7 +31,12 @@
                 <li><a href="methodology.html">About Us</a></li>
                 <li><a href="#" class="nav-login">Login</a></li>
             </ul>
-
+            <div class="theme-switch-container">
+                <label class="theme-switch" for="theme-toggle">
+                    <input type="checkbox" id="theme-toggle" />
+                    <span class="slider round"></span>
+                </label>
+            </div>
             <div class="hamburger" id="hamburger">
                 <div class="bar"></div>
                 <div class="bar"></div>
@@ -48,57 +53,72 @@
 
         <section class="selection-grid">
 
-            <div class="model-select-card" data-model="xgboost">
-                <i class="fas fa-rocket"></i>
-                <h3>XGBoost</h3>
-                <h4>The High-Performance Predictor</h4>
-                <p>The best all-around engine for fast and accurate congestion predictions (0-1) for the next 1-3 hours.
-                </p>
-                <button class="select-btn">Select Model</button>
+            <div class="model-card-wrapper" data-model="xgboost">
+                <img src="assets/images/xgboost-bg.png" class="card-bg-image" alt="XGBoost Background">
+
+                <div class="model-card-content">
+                    <div class="lottie-icon" id="lottie-xgboost"></div>
+
+                    <h3>XGBoost</h3>
+                    <h4>The High-Performance Predictor</h4>
+                    <p>The best all-around engine for fast and accurate congestion predictions...</p>
+                    <button class="select-btn btn-xgboost">Select Model</button>
+                </div>
             </div>
 
-            <div class="model-select-card" data-model="lstm">
-                <i class="fas fa-chart-line"></i>
-                <h3>LSTM</h3>
-                <h4>The Future Forecaster</h4>
-                <p>Predicts the traffic "shape" and trend over a longer period, like the next 12-24 hours.</p>
-                <button class="select-btn">Select Model</button>
+            <div class="model-card-wrapper" data-model="lstm">
+                <img src="assets/images/lstm-bg.png" class="card-bg-image" alt="LSTM Background">
+                <div class="model-card-content">
+                    <div class="lottie-icon" id="lottie-lstm"></div>
+                    <h3>LSTM</h3>
+                    <h4>The Future Forecaster</h4>
+                    <p>Predicts the traffic "shape" and trend over a longer period...</p>
+                    <button class="select-btn btn-lstm">Select Model</button>
+                </div>
             </div>
 
-            <div class="model-select-card" data-model="catboost">
-                <i class="fas fa-map-marked-alt"></i>
-                <h3>CatBoost</h3>
-                <h4>The 'Smart Context' Predictor</h4>
-                <p>Excels at understanding non-numeric factors like 'DayOfWeek' or 'Public Event' for highly accurate
-                    predictions.</p>
-                <button class="select-btn">Select Model</button>
+            <div class="model-card-wrapper" data-model="catboost">
+                <img src="assets/images/catboost-bg.png" class="card-bg-image" alt="CatBoost Background">
+                <div class="model-card-content">
+                    <div class="lottie-icon" id="lottie-catboost"></div>
+                    <h3>CatBoost</h3>
+                    <h4>The 'Smart Context' Predictor</h4>
+                    <p>Excels at understanding non-numeric factors like 'DayOfWeek'...</p>
+                    <button class="select-btn btn-catboost">Select Model</button>
+                </div>
             </div>
 
-            <div class="model-select-card" data-model="randomforest">
-                <i class="fas fa-tachometer-alt"></i>
-                <h3>Random Forest</h3>
-                <h4>The Speed & Route Specialist</h4>
-                <p>Provides the most reliable prediction for average vehicle speed (km/h) and is excellent at finding
-                    faster alternative routes.</p>
-                <button class="select-btn">Select Model</button>
+            <div class="model-card-wrapper" data-model="randomforest">
+                <img src="assets/images/randomforest-bg.png" class="card-bg-image" alt="Random Forest Background">
+                <div class="model-card-content">
+                    <div class="lottie-icon" id="lottie-randomforest"></div>
+                    <h3>Random Forest</h3>
+                    <h4>The Speed & Route Specialist</h4>
+                    <p>Provides the most reliable prediction for average vehicle speed...</p>
+                    <button class="select-btn btn-randomforest">Select Model</button>
+                </div>
             </div>
 
-            <div class="model-select-card" data-model="kmeans">
-                <i class="fas fa-search-location"></i>
-                <h3>K-Means Clustering</h3>
-                <h4>The Pattern Detective</h4>
-                <p>Finds hidden historical patterns in road data, like "Weekend Shopping Surges" or "Morning Commute"
-                    profiles.</p>
-                <button class="select-btn">Select Model</button>
+            <div class="model-card-wrapper" data-model="kmeans">
+                <img src="assets/images/kmeans-bg.png" class="card-bg-image" alt="K-Means Background">
+                <div class="model-card-content">
+                    <div class="lottie-icon" id="lottie-kmeans"></div>
+                    <h3>K-Means Clustering</h3>
+                    <h4>The Pattern Detective</h4>
+                    <p>Finds hidden historical patterns in road data...</p>
+                    <button class="select-btn btn-kmeans">Select Model</button>
+                </div>
             </div>
 
-            <div class="model-select-card" data-model="hybrid">
-                <i class="fas fa-brain"></i>
-                <h3>Hybrid (Ensemble)</h3>
-                <h4>The Ultimate Accuracy Engine</h4>
-                <p>Combines the power of all other models to achieve the highest possible prediction accuracy. The
-                    "Super-Team".</p>
-                <button class="select-btn">Select Model</button>
+            <div class="model-card-wrapper" data-model="hybrid">
+                <img src="assets/images/hybrid-bg.png" class="card-bg-image" alt="Hybrid Background">
+                <div class="model-card-content">
+                    <div class="lottie-icon" id="lottie-hybrid"></div>
+                    <h3>Hybrid (Ensemble)</h3>
+                    <h4>The Ultimate Accuracy Engine</h4>
+                    <p>Combines the power of all other models to achieve the highest...</p>
+                    <button class="select-btn btn-hybrid">Select Model</button>
+                </div>
             </div>
 
         </section>
@@ -110,9 +130,9 @@
             <p>A project by You & Gemini. Built with ❤️ in India.</p>
         </div>
     </footer>
-
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <script src="assets/js/main.js"></script>
-
+    <script src="assets/js/theme-toggle.js"></script>
     <script src="assets/js/model-selection.js"></script>
 
 </body>

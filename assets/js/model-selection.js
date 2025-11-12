@@ -2,6 +2,31 @@
 // This script runs on the modelSelection.html page.
 
 document.addEventListener('DOMContentLoaded', () => {
+   // --- NEW: LOTTIE ANIMATION LOADER ---
+const lottieAnimations = {
+        'lottie-xgboost': 'assets/lottie/xgboost.json',
+        'lottie-lstm': 'assets/lottie/lstm.json',
+        'lottie-catboost': 'assets/lottie/catboost.json',
+        'lottie-randomforest': 'assets/lottie/randomforest.json',
+        'lottie-kmeans': 'assets/lottie/kmeans.json',
+        'lottie-hybrid': 'assets/lottie/hybrid.json'
+    };
+    //
+
+    for (const id in lottieAnimations) {
+        const container = document.getElementById(id);
+        if (container) {
+            const player = document.createElement('lottie-player');
+            player.setAttribute('src', lottieAnimations[id]);
+            player.setAttribute('background', 'transparent');
+            player.setAttribute('speed', '1');
+            player.setAttribute('loop', '');
+            player.setAttribute('autoplay', '');
+            container.appendChild(player);
+        }
+    }
+    // --- END LOTTIE ---
+   
     // Select all the model cards
     const modelCards = document.querySelectorAll('.model-select-card');
 
