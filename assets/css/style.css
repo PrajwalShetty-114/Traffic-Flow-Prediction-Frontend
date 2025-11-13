@@ -249,6 +249,18 @@ h2 {
    5. HOW IT WORKS & FEATURES SECTIONS
    ================================================================= */
 
+/* =================================================================
+   5. HOW IT WORKS & FEATURES SECTIONS (UPDATED)
+   ================================================================= */
+
+.how-it-works-section,
+.features-section {
+    padding: 6rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
 .steps-container,
 .features-container {
     display: flex;
@@ -256,33 +268,125 @@ h2 {
     gap: 2rem;
 }
 
+/* --- New Card Styles (Applies to both sections) --- */
 .step,
 .feature-item {
-    background-color: var(--secondary-color);
-    padding: 2rem;
-    border-radius: 10px;
-    border: 1px solid #0f3460;
     flex: 1;
+    position: relative; /* Main container for the "sandwich" */
+    border-radius: 10px;
+    overflow: hidden; /* Clips the image and overlay */
+    padding: 2.5rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    /* Set a default aspect ratio */
+    min-height: 350px; 
+    
+    /* Background image setup */
+    background-size: cover;
+    background-position: center;
+    
+    /* Ensure content is laid out vertically */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
+.step:hover,
+.feature-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* --- The Semi-Transparent "Black Shade" Overlay --- */
+.step::before,
+.feature-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    
+    /* The gradient overlay */
+    background: linear-gradient(to bottom, 
+        rgba(10, 10, 10, 0.4) 0%, 
+        rgba(10, 10, 10, 0.9) 100%
+    );
+    
+    z-index: 1; /* Sits behind text, on top of bg image */
+    transition: opacity 0.3s ease;
+}
+
+.step:hover::before,
+.feature-item:hover::before {
+    opacity: 0.8; /* Make overlay slightly more solid on hover */
+}
+
+
+/* --- Assigning the Background Images --- */
+/* (Make sure you have images with these names in /assets/images/) */
+
+.steps-container .step:nth-child(1) {
+    background-image: url('../images/how-it-works-1-map.png');
+}
+.steps-container .step:nth-child(2) {
+    background-image: url('../images/how-it-works-2-time.png');
+}
+.steps-container .step:nth-child(3) {
+    background-image: url('../images/how-it-works-3-chart.png');
+}
+
+.features-container .feature-item:nth-child(1) {
+    background-image: url('../images/feature-1-event.png');
+}
+.features-container .feature-item:nth-child(2) {
+    background-image: url('../images/feature-2-route.png');
+}
+
+
+/* --- Content Styling (To sit on top of the overlay) --- */
+.step-icon,
+.feature-icon,
+.step h3,
+.feature-item h4, /* Updated selector */
+.step p,
+.feature-item p {
+    position: relative; /* Sit on top of the overlay */
+    z-index: 2;
+    transition: transform 0.3s ease;
+}
+
+/* --- Icon Styles --- */
 .step-icon,
 .feature-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color); /* Bright accent color */
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-h3 {
+/* Icon hover animation */
+.step:hover .step-icon i,
+.feature-item:hover .feature-icon i {
+    transform: scale(1.1) translateY(-5px);
+}
+
+/* --- Text Styles (Forced light colors for readability) --- */
+.step h3,
+.feature-item h4 {
     font-size: 1.5rem;
-    color: var(--heading-color);
+    color: #ffffff; /* Always white */
     margin-bottom: 0.5rem;
 }
 
-h4 {
-    font-size: 1.3rem;
-    color: var(--heading-color);
-    margin-bottom: 0.5rem;
+.step p,
+.feature-item p {
+    color: #e4e4e4; /* Always light grey */
 }
-
 /* =================================================================
    6. FOOTER
    ================================================================= */
