@@ -27,8 +27,8 @@ const lottieAnimations = {
     }
     // --- END LOTTIE ---
    
-    // Select all the model cards
-    const modelCards = document.querySelectorAll('.model-select-card');
+    // Select all the model cards (match actual HTML class)
+    const modelCards = document.querySelectorAll('.model-card-wrapper');
 
     // Loop through each card
     for (let i = 0; i < modelCards.length; i++) {

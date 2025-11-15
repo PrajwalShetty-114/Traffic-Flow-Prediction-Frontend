@@ -525,13 +525,12 @@ h2 {
     /* Needed to position the results card inside it */
 }
 
+/* Make maps responsive: cap to 700px but use viewport height on small screens */
 #map {
     width: 100%;
-    height: 700px;
-    /* Define a fixed height for the map */
+    height: min(700px, 60vh);
     border-radius: 10px;
     background-color: var(--map-bg);
-    /* Placeholder color */
 }
 
 #results-card {
@@ -574,6 +573,63 @@ h2 {
         max-width: 100%;
         /* Allow control panel to take full width */
         width: 100%;
+    }
+}
+
+/* Better tablet/mobile layout for maps and panels */
+@media (max-width: 1024px) {
+    .dashboard-container {
+        padding: 1rem 3%;
+        gap: 1rem;
+        align-items: stretch;
+    }
+
+    /* Make map use most of the viewport while leaving room for header and controls */
+    #map, #expert-map, #dynamic-viz-container {
+        height: calc(100vh - 260px);
+        min-height: 300px;
+    }
+
+    /* Results card should flow below the map instead of overlapping it */
+    #results-card, #expert-results-card {
+        position: relative;
+        top: auto;
+        right: auto;
+        width: 100%;
+        margin-top: 0.75rem;
+        box-shadow: none;
+        background-color: var(--secondary-color);
+        color: var(--text-color);
+        border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    /* Make control panel compact on tablets */
+    #control-panel {
+        padding: 1rem;
+        border-radius: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* On small phones, give the map a slightly larger reserved space */
+    #map, #expert-map, #dynamic-viz-container {
+        height: calc(100vh - 300px);
+        min-height: 260px;
+    }
+
+    /* Reduce heading sizes and paddings for small screens */
+    #control-panel h2 {
+        font-size: 1.4rem;
+    }
+
+    .cta-button, .select-btn {
+        padding: 0.7rem;
+        font-size: 0.95rem;
+    }
+
+    /* Ensure the results card content remains readable */
+    #results-card, #expert-results-card {
+        padding: 0.85rem;
     }
 }
 
@@ -995,12 +1051,12 @@ h2 {
    ================================================================= */
 
 /* This container will hold our dynamic map or charts */
+/* Expert dashboard visualization container (responsive) */
 #dynamic-viz-container {
     width: 100%;
-    height: 700px;
+    height: min(700px, 60vh);
     border-radius: 10px;
     background-color: #0f3460;
-    /* Placeholder background */
 }
 
 /* This will be the new container for our dynamic charts */
@@ -1020,13 +1076,12 @@ h2 {
    ================================================================= */
 
 /* We need to give our new map container a height */
+/* Expert map container - responsive height */
 #expert-map {
     width: 100%;
-    height: 700px;
-    /* This is the missing line! */
+    height: min(700px, 60vh);
     border-radius: 10px;
     background-color: var(--map-bg);
-    /* Placeholder color */
 }
 
 /* =================================================================

@@ -220,6 +220,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const map = L.map('expert-map').setView([12.9716, 77.5946], 12);
         console.log('initializeStandardPredictorLogic: map created');
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        // Ensure leaflet correctly paints tiles after responsive layout changes
+        setTimeout(() => { try { map.invalidateSize(); } catch (e) { } }, 200);
+        window.addEventListener('resize', () => { try { map.invalidateSize(); } catch (e) { } });
 
         const timeButtons = document.querySelectorAll('.time-btn');
         const selectedRoadText = document.getElementById('expert-selected-road');
@@ -298,6 +301,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const map = L.map('expert-map').setView([12.9716, 77.5946], 12);
         console.log('initializeLstmLogic: map created');
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        setTimeout(() => { try { map.invalidateSize(); } catch (e) { } }, 200);
+        window.addEventListener('resize', () => { try { map.invalidateSize(); } catch (e) { } });
 
         const datePicker = document.getElementById('lstm-date-picker');
         const selectedRoadText = document.getElementById('expert-selected-road');
@@ -353,6 +358,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const map = L.map('expert-map').setView([12.9716, 77.5946], 12);
         console.log('initializeCatBoostLogic: map created');
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        setTimeout(() => { try { map.invalidateSize(); } catch (e) { } }, 200);
+        window.addEventListener('resize', () => { try { map.invalidateSize(); } catch (e) { } });
 
         const eventSelect = document.getElementById('catboost-event-select');
         const selectedRoadText = document.getElementById('expert-selected-road');

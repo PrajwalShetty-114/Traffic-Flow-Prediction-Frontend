@@ -9,6 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
+    // Fix for responsive displays: Leaflet needs to be invalidated when container size changes
+    // Call once after a small timeout and on window resize so map tiles render correctly on small screens.
+    setTimeout(() => { try { map.invalidateSize(); } catch (e) { /* ignore */ } }, 200);
+    window.addEventListener('resize', () => { try { map.invalidateSize(); } catch (e) { } });
+
     
     // --- 2. HANDLE USER INPUT & SELECTIONS ---
     // ------------------------------------------
