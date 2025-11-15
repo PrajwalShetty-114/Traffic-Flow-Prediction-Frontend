@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let activeChart = null;
 
     // The single, new API route for all expert models
-    const EXPERT_API_URL = 'http://localhost:3000/api/expert-predict';
+    const EXPERT_API_URL = 'https://traffic-prediction-backend-1n7l.onrender.com/api/expert-predict';
 
     // --- 3. CALL THE CORRECT UI BUILDER ---
     switch (selectedModel) {

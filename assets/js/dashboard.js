@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let roadLayers = {}; // To store map layers for easy access
 
     async function fetchRoads() {
-        const backendURL = 'http://localhost:3000/api/roads';
+        const backendURL = 'https://traffic-prediction-backend-1n7l.onrender.com/api/roads';
         try {
             const response = await fetch(backendURL);
             if (!response.ok) throw new Error('Network response was not ok');
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
         predictButton.textContent = 'Predicting...'; // Provide user feedback
 
         try {
-            const response = await fetch('http://localhost:3000/api/predict', {
+            const response = await fetch('https://traffic-prediction-backend-1n7l.onrender.com/api/predict', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
