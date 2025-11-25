@@ -554,13 +554,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function displayCatBoostResults(result) {
-        console.log('displayCatBoostResults: called with result ->', result);
+  function displayCatBoostResults(result) {
         const resultsContent = document.getElementById('expert-results-content');
+        
+        // --- FIX: Access properties inside 'result.predictions' ---
+        const congestionPct = (result.predictions.congestion.level * 100).toFixed(0);
+        const avgSpeed = result.predictions.avgSpeed;
+        const volume = result.predictions.predictedVolume; 
+
         resultsContent.innerHTML = `
-            <p><strong>Congestion Level:</strong> ${result.congestion * 100}%</p>
-            <p><strong>Average Speed:</strong> ${result.avgSpeed} km/h</p>
+            <p><strong>Congestion Level:</strong> ${congestionPct}% (${result.predictions.congestion.label})</p>
+            <p><strong>Average Speed:</strong> ${avgSpeed} km/h</p>
+            <p style="font-size: 0.9em; opacity: 0.8;">Predicted Volume: ${volume}</p>
         `;
+
         if (activeChart) activeChart.destroy();
         const ctx = document.getElementById('catboost-bar-chart').getContext('2d');
         activeChart = new Chart(ctx, {
