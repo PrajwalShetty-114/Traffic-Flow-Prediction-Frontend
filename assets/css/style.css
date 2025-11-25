@@ -1085,40 +1085,76 @@ h2 {
 }
 
 /* =================================================================
-   19. EXPERT DASHBOARD RESULTS CARD FIX
+   19. EXPERT DASHBOARD LAYOUT FIX (Responsive Overlay)
    ================================================================= */
 
-/* We make the main visualization container 'relative'
-   so the results card can be positioned 'absolute' inside it.
-*/
+/* 1. The Main Container acts as the "Stage" */
 #dynamic-viz-container {
-    position: relative;
+    position: relative; /* Essential for absolute positioning inside */
+    width: 100%;
+    height: 700px; /* Fixed height for desktop */
+    border-radius: 10px;
+    overflow: hidden; /* Keeps everything (even the card) inside rounded corners */
 }
 
-/* These are the styles for our expert results card.
-   This is the code that was missing.
-*/
+/* 2. The Map fills the stage */
+#expert-map {
+    width: 100%;
+    height: 100%; /* Fill the container's 700px */
+    z-index: 1; /* Sits at the bottom */
+}
+
+/* 3. The Results Card floats on top */
 #expert-results-card {
     position: absolute;
-    /* This is the most important rule */
     top: 20px;
     right: 20px;
-    background-color: rgba(15, 52, 96, 0.8);
-    /* Semi-transparent */
+    width: 320px; /* Fixed width for desktop */
+    max-height: 90%; /* Prevents card from being taller than the map */
+    overflow-y: auto; /* Adds scrollbar inside card if content is too long */
+    
+    background-color: rgba(15, 52, 96, 0.9); /* Darker, more solid background */
     backdrop-filter: blur(10px);
-    /* Frosted glass effect */
     padding: 1.5rem;
     border-radius: 10px;
-    z-index: 1000;
-    /* Ensures it's on top of the map */
-    width: 300px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     border: 1px solid var(--secondary-color);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    
+    z-index: 1000; /* Sits on top of map */
+    
+    /* Transition for smooth appearance */
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* This is the class our JS uses to hide/show the card */
-#expert-results-card.hidden {
-    display: none;
+/* 4. Chart Container Fix */
+/* Ensure the chart doesn't collapse the card */
+#expert-chart-container {
+    position: relative;
+    height: 250px; /* Slightly smaller to fit better */
+    width: 100%;
+    margin-top: 1rem;
+}
+
+/* =================================================================
+   MOBILE RESPONSIVENESS
+   ================================================================= */
+
+@media (max-width: 768px) {
+    /* On mobile, make the map container taller to fit map + card */
+    #dynamic-viz-container {
+        height: 800px; 
+    }
+
+    /* Move the card to the BOTTOM of the map on mobile */
+    #expert-results-card {
+        top: auto; /* Unset top */
+        bottom: 0; /* Stick to bottom */
+        right: 0;
+        left: 0; /* Stretch across width */
+        width: 100%;
+        border-radius: 10px 10px 0 0; /* Round only top corners */
+        max-height: 50%; /* Take up max half the screen */
+    }
 }
 
 /* =================================================================

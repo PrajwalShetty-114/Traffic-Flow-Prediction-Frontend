@@ -148,14 +148,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function buildKMeansUI() {
-        console.log('buildKMeansUI: start');
         title.textContent = 'K-Means: Pattern Detective';
+
         formContainer.innerHTML = `
             <div class="control-group">
-                <label>📍 Step 1: Choose Your Location</label> <p class="info-text">Click anywhere on the map to analyze historical patterns for that area.<br>
+                <label>📍 Step 1: Choose Your Location</label>
+                <p class="info-text">Click anywhere on the map to analyze historical patterns for that area.<br>
                 <strong>Selected:</strong> <span id="expert-selected-road">None</span></p>
             </div>
         `;
+
         vizContainer.innerHTML = `
             <div id="expert-map"></div>
             <div id="expert-results-card" class="hidden">
@@ -163,17 +165,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div id="expert-results-content">
                     <p>Select a location and click "Find Patterns" to see its typical traffic profiles.</p>
                 </div>
-                <div id="expert-chart-container" style="height: 400px; margin-top: 20px;">
+                
+                <div id="expert-chart-container" style="position: relative; height: 300px; width: 100%;">
                     <canvas id="kmeans-pie-chart"></canvas>
                 </div>
             </div>
         `;
+
         predictButton.textContent = 'Find Patterns';
         predictButton.classList.remove('hidden');
         setTimeout(initializeKMeansLogic, 0);
-        console.log('buildKMeansUI: done');
     }
-
     function buildHybridUI() {
         console.log('buildHybridUI: start');
         title.textContent = 'Hybrid: Ultimate Accuracy Engine';
@@ -417,8 +419,9 @@ document.addEventListener('DOMContentLoaded', () => {
         setupDynamicMapClick(map, selectedRoadText);
         console.log('initializeKMeansLogic: map click setup complete');
 
+        // Inside initializeKMeansLogic function...
+
         predictButton.addEventListener('click', async () => {
-            console.log('KMeans predict clicked: userSelections ->', userSelections);
             if (!userSelections.coordinates) {
                 alert('Please select a location on the map first!');
                 return;
@@ -431,19 +434,33 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: JSON.stringify(userSelections),
                 });
                 if (!response.ok) throw new Error('Pattern request failed');
-                const patterns = await response.json();
-                console.log('KMeans patterns received:', patterns);
+                
+                // 1. Get the result from the backend
+                const result = await response.json();
 
+                // 2. Update the text content
                 resultsRoadName.textContent = `Lat: ${userSelections.coordinates.lat.toFixed(4)}, Lng: ${userSelections.coordinates.lng.toFixed(4)}`;
-                resultsContent.innerHTML = `<p>This location typically experiences the following traffic patterns:</p>`;
-                displayKMeansResults(patterns);
+                
+                resultsContent.innerHTML = `
+                    <p><strong>Traffic Profile:</strong> <span style="color: ${result.color}; font-weight: bold;">${result.trafficState}</span></p>
+                    <p>${result.description}</p>
+                    <p style="font-size: 0.9em; opacity: 0.8;">Analyzed Volume: ${result.volumeAnalyzed}</p>
+                `;
+
+                // 3. CRITICAL FIX: Pass the specific sub-object 'patternDistribution'
+                // The display function expects an object with .labels and .data
+                if (result.patternDistribution) {
+                    displayKMeansResults(result.patternDistribution);
+                } else {
+                    console.error("Missing patternDistribution in response:", result);
+                }
+
                 resultsCard.classList.remove('hidden');
             } catch (error) {
                 console.error('Error finding patterns:', error);
                 resultsCard.classList.add('hidden');
             } finally {
                 predictButton.textContent = 'Find Patterns';
-                console.log('KMeans predict finished');
             }
         });
     }
@@ -596,33 +613,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function displayKMeansResults(patterns) {
-        console.log('displayKMeansResults: called with patterns ->', patterns);
+        // Destroy old chart if it exists
         if (activeChart) activeChart.destroy();
+
         const ctx = document.getElementById('kmeans-pie-chart').getContext('2d');
+        
         activeChart = new Chart(ctx, {
-            type: 'pie',
+            type: 'doughnut', // 'doughnut' often looks better than 'pie' for this
             data: {
                 labels: patterns.labels,
                 datasets: [{
-                    label: 'Pattern Percentage',
                     data: patterns.data,
                     backgroundColor: [
-                        'rgba(233, 69, 96, 0.7)',
-                        'rgba(252, 163, 17, 0.7)',
-                        'rgba(15, 52, 96, 0.7)',
-                        'rgba(228, 228, 228, 0.7)'
+                        '#4CAF50', // Green
+                        '#FFC107', // Amber
+                        '#FF9800', // Orange
+                        '#F44336'  // Red
                     ],
-                    borderColor: '#1a1a2e',
-                    borderWidth: 2
+                    borderWidth: 0
                 }]
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false,
+                maintainAspectRatio: false, // Crucial for fitting into our container
                 plugins: {
                     legend: {
-                        position: 'top',
-                        labels: { color: '#e4e4e4' }
+                        position: 'right', // Move legend to side to save vertical space
+                        labels: { 
+                            color: '#e4e4e4',
+                            font: { size: 11 }
+                        }
                     }
                 }
             }
