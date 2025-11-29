@@ -20,6 +20,10 @@ body[data-theme='light'] {
     /* Semi-transparent white */
     --map-bg: #e0e0e0;
     /* Light placeholder for map */
+    --bg-gradient: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%); /* Subtle light mesh */
+    --card-bg: rgba(255, 255, 255, 0.65); /* Glass effect base */
+    --card-border: rgba(255, 255, 255, 0.4);
+    --shadow-color: rgba(0, 0, 0, 0.05);
 }
 
 /* Dark Theme */
@@ -36,6 +40,13 @@ body[data-theme='dark'] {
     --nav-background-color: rgba(10, 10, 10, 0.3);
     /* <-- CHANGED to be less blue */
     --map-bg: #000;
+    --bg-gradient: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                   radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
+                   radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+    --background-color: #050505; /* Fallback/Base */
+    --card-bg: rgba(30, 30, 30, 0.6); /* Glass effect base */
+    --card-border: rgba(255, 255, 255, 0.1);
+    --shadow-color: rgba(0, 0, 0, 0.3);
 }
 
 /* =================================================================
@@ -52,6 +63,10 @@ body[data-theme='dark'] {
 }
 
 body {
+    background: var(--background-color); /* Fallback */
+    background-image: var(--bg-gradient);
+    background-attachment: fixed; /* Parallax-like effect */
+    background-size: cover;
     font-family: 'Poppins', sans-serif;
     background-color: var(--background-color);
     color: var(--text-color);
@@ -809,127 +824,100 @@ h2 {
    ================================================================= */
 .selection-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
     gap: 2rem;
     padding: 3rem 5%;
     max-width: 1400px;
     margin: 0 auto;
 }
 
-/* This is the main card container */
 .model-card-wrapper {
     position: relative;
-    /* This is the key */
-    border-radius: 10px;
+    border-radius: 16px; /* Softer corners */
     overflow: hidden;
-    /* Clips the image to the card shape */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-    /* Set a fixed aspect ratio for uniformity */
-    aspect-ratio: 3 / 4;
+    aspect-ratio: 3 / 4; /* Portrait poster shape */
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
 .model-card-wrapper:hover {
     transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
 }
 
-/* This is the background image */
+/* Background Image */
 .card-bg-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth zoom */
+    z-index: 0;
+}
+
+.model-card-wrapper:hover .card-bg-image {
+    transform: scale(1.1); /* Zoom in effect */
+}
+
+/* The Overlay & Content */
+.model-card-content {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    /* Makes the image cover the card */
     z-index: 1;
-    /* Sits at the very back */
-    transition: transform 0.4s ease;
-
-    /* Start with image slightly faded */
-    opacity: 0.8;
-}
-
-.model-card-wrapper:hover .card-bg-image {
-    transform: scale(1.1);
-    /* Nice zoom-on-hover effect */
-    opacity: 1.0;
-    /* Fully visible on hover */
-}
-
-/* This is the semi-transparent content overlay */
-.model-card-content {
-    position: relative;
-    z-index: 2;
-    /* Sits on top of the image */
-    padding: 1.5rem;
-    /* Reduced padding for more space */
-    text-align: center;
-    height: 100%;
-    /* Make sure it fills the card */
-
-    /* Create a gradient overlay: more transparent at top, darker at bottom */
-    background: linear-gradient(to bottom,
-            rgba(10, 10, 10, 0.8) 0%,
-            /* 40% black at top */
-            rgba(10, 10, 10, 0.4) 100%
-            /* 90% black at bottom */
-        );
-
-    /* Add a backdrop filter for the "frosted glass" look on content */
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
-
-    /* Force text to be readable (always light) */
-    --heading-color: #ffffff;
-    /* Override theme for cards */
-    --text-color: #e4e4e4;
-    /* Override theme for cards */
-
-    /* Flexbox to push button to the bottom */
+    
+    /* Cinematic Gradient: Transparent top, dark bottom */
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 60%, rgba(0,0,0,0.95) 100%);
+    
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    /* Pushes content to bottom */
+    justify-content: flex-end; /* Push text to bottom */
+    padding: 2rem;
+    text-align: center;
+    color: white; /* Always white text on dark images */
 }
 
-/* Placeholder for Lottie animations */
-.lottie-icon {
-    width: 100%;
-    height: 100px;
-    /* Give it a fixed height */
-    margin-bottom: 1rem;
-    flex-grow: 1;
-    /* This pushes all text/button to bottom */
+/* Icon Box */
+.icon-box {
+    margin-bottom: auto; /* Pushes icon to the top */
+    margin-top: 2rem;
+    font-size: 3.5rem;
+    color:whitesmoke;
+    transition: transform 0.4s ease, color 0.3s ease;
+    text-shadow: 0 0 20px rgba(255,255,255,0.3);
 }
 
-/* --- Readability Fixes (using the overridden colors) --- */
+.model-card-wrapper:hover .icon-box {
+    transform: scale(1.2); /* Icon grows */
+color: #ff6b81; 
+    text-shadow: 0 0 30px rgba(255, 107, 129, 0.8);
+}
+
+/* Typography */
 .model-card-content h3 {
-    font-size: 1.6rem;
-    color: var(--heading-color);
-    /* Always white */
-    margin-bottom: 0.5rem;
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 0.2rem;
+    letter-spacing: 1px;
 }
 
 .model-card-content h4 {
-    font-size: 1rem;
-    color: var(--accent-color);
-    /* Always orange */
-    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent-color); /* Orange accent */
     margin-bottom: 1rem;
 }
 
 .model-card-content p {
-    font-size: 0.9rem;
-    /* Slightly smaller text */
+    font-size: 0.95rem;
+    opacity: 0.8;
     margin-bottom: 1.5rem;
-    color: var(--text-color);
-    /* Always light grey */
-    flex-grow: 0;
-    /* Don't let paragraph grow */
+    line-height: 1.5;
 }
-
 
 .select-btn {
     width: 100%;
@@ -1090,42 +1078,42 @@ h2 {
 
 /* 1. The Main Container acts as the "Stage" */
 #dynamic-viz-container {
-    position: relative; /* Essential for absolute positioning inside */
+    position: relative;
     width: 100%;
-    height: 700px; /* Fixed height for desktop */
+    /* Default (Desktop): Use viewport height minus header/padding */
+    height: calc(100vh - 140px); 
+    min-height: 500px; /* Never too small */
+    max-height: 800px; /* Never too tall */
     border-radius: 10px;
-    overflow: hidden; /* Keeps everything (even the card) inside rounded corners */
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1); /* Subtle depth */
 }
 
-/* 2. The Map fills the stage */
+/* 2. The Map */
 #expert-map {
     width: 100%;
-    height: 100%; /* Fill the container's 700px */
-    z-index: 1; /* Sits at the bottom */
+    height: 100%;
+    z-index: 1;
 }
 
-/* 3. The Results Card floats on top */
+/* 3. The Results Card (Desktop: Floating Overlay) */
 #expert-results-card {
     position: absolute;
     top: 20px;
     right: 20px;
-    width: 320px; /* Fixed width for desktop */
-    max-height: 90%; /* Prevents card from being taller than the map */
-    overflow-y: auto; /* Adds scrollbar inside card if content is too long */
+    width: 320px;
+    max-height: 85%; /* Don't overflow the map */
+    overflow-y: auto; /* Scroll inside card if needed */
     
-    background-color: rgba(15, 52, 96, 0.9); /* Darker, more solid background */
+    background-color: rgba(15, 52, 96, 0.95); /* High contrast background */
     backdrop-filter: blur(10px);
     padding: 1.5rem;
-    border-radius: 10px;
+    border-radius: 12px;
     border: 1px solid var(--secondary-color);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    
-    z-index: 1000; /* Sits on top of map */
-    
-    /* Transition for smooth appearance */
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    z-index: 1000;
+    transition: all 0.3s ease;
 }
-
 /* 4. Chart Container Fix */
 /* Ensure the chart doesn't collapse the card */
 #expert-chart-container {
@@ -1141,24 +1129,89 @@ h2 {
 
 @media (max-width: 768px) {
     /* On mobile, make the map container taller to fit map + card */
-    #dynamic-viz-container {
-        height: 800px; 
+#dynamic-viz-container {
+        height: 50vh; /* Only take up half the screen height */
+        min-height: 350px;
     }
 
-    /* Move the card to the BOTTOM of the map on mobile */
+    /* Move Card to Bottom Sheet */
     #expert-results-card {
-        top: auto; /* Unset top */
-        bottom: 0; /* Stick to bottom */
+        top: auto;
+        bottom: 0;
         right: 0;
-        left: 0; /* Stretch across width */
+        left: 0;
         width: 100%;
-        border-radius: 10px 10px 0 0; /* Round only top corners */
-        max-height: 50%; /* Take up max half the screen */
+        max-height: 45%; /* Don't cover the whole map */
+        border-radius: 15px 15px 0 0;
+        border-bottom: none;
+        transform: translateY(0);
     }
 }
 
 /* =================================================================
-   20. MODEL CARD BACKGROUND IMAGES
+   20. CUSTOM MAP MARKER STYLES
+   ================================================================= */
+
+/* The Container */
+.custom-map-marker {
+    background: transparent;
+    border: none;
+}
+
+/* The Pin Shape */
+.marker-pin {
+    width: 40px;
+    height: 40px;
+    border-radius: 50% 50% 50% 0;
+    background: var(--primary-color); /* Matches your theme! */
+    position: absolute;
+    transform: rotate(-45deg);
+    left: 50%;
+    top: 50%;
+    margin: -20px 0 0 -20px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+    
+    /* Center the icon inside */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* The Icon inside the Pin */
+.marker-pin i {
+    transform: rotate(45deg); /* Un-rotate the icon so it stands straight */
+    color: white;
+    font-size: 1.2rem;
+    margin-top: 3px; /* Subtle optical adjustment */
+}
+/* Styling for icons inside the Control Panel labels */
+.icon-label {
+    color: var(--primary-color);
+    margin-right: 8px; /* Space between icon and text */
+    font-size: 1.1rem;
+    width: 20px; /* Fixed width ensures text aligns even if icons differ */
+    text-align: center;
+}
+/* Optional: Pulse Animation for the active pin */
+.marker-pin::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    border-radius: 50% 50% 50% 0;
+    position: absolute;
+    background: var(--primary-color);
+    z-index: -1;
+    opacity: 0.7;
+    animation: pulse-pin 2s infinite;
+}
+
+@keyframes pulse-pin {
+    0% { transform: scale(1); opacity: 0.7; }
+    100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* =================================================================
+   21. MODEL CARD BACKGROUND IMAGES
    ================================================================= */
 
 /* .model-select-card {

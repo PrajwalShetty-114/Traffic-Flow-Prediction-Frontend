@@ -77,12 +77,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         formContainer.innerHTML = `
             <div class="control-group">
-                <label>📍 Step 1: Choose Your Location</label>
+                <label><i class="fas fa-map-marker-alt icon-label"></i> Step 1: Choose Your Location</label>
                 <p class="info-text">Click anywhere on the map to place a pin.<br>
                 <strong>Selected:</strong> <span id="expert-selected-road">None</span></p>
             </div>
             <div class="control-group">
-                <label>🗓️ Step 2: Select Forecast Date</label>
+                <label><i class="fas fa-calendar-day icon-label"></i> Step 2: Select Forecast Date</label>
                 <input type="date" id="lstm-date-picker" class="control-group-input">
             </div>
         `;
@@ -93,7 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h3>24-Hour Forecast for <span id="expert-results-road-name"></span></h3>
                 <div id="expert-results-content">
                     </div>
-                
                 <div id="lstm-chart-container" style="position: relative; height: 300px; width: 100%;">
                     <canvas id="lstm-line-chart"></canvas>
                 </div>
@@ -105,21 +104,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function buildCatBoostUI() {
-        console.log('buildCatBoostUI: start');
         title.textContent = 'CatBoost: Smart Context Predictor';
+
         formContainer.innerHTML = `
             <div class="control-group">
-                <label>📍 Step 1: Choose Your Location</label> <p class="info-text">Click anywhere on the map to place a pin.<br>
+                <label><i class="fas fa-map-marker-alt icon-label"></i> Step 1: Choose Your Location</label>
+                <p class="info-text">Click anywhere on the map to place a pin.<br>
                 <strong>Selected:</strong> <span id="expert-selected-road">None</span></p>
             </div>
             <div class="control-group">
-                <label>⏰ Step 2: Set Prediction Time</label>
+                <label><i class="fas fa-clock icon-label"></i> Step 2: Set Prediction Time</label>
                 <div class="button-group">
                     <button class="time-btn active">Next Hour</button>
                 </div>
             </div>
             <div class="control-group">
-                <label>🎟️ Step 3: Select Local Event (Optional)</label>
+                <label><i class="fas fa-ticket-alt icon-label"></i> Step 3: Select Local Event (Optional)</label>
                 <select id="catboost-event-select" class="control-group-input">
                     <option value="None">None</option>
                     <option value="Cricket Match">Cricket Match</option>
@@ -128,6 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </select>
             </div>
         `;
+
         vizContainer.innerHTML = `
             <div id="expert-map"></div>
             <div id="expert-results-card" class="hidden">
@@ -139,9 +140,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
         `;
+
         predictButton.classList.remove('hidden');
         setTimeout(initializeCatBoostLogic, 0);
-        console.log('buildCatBoostUI: done');
     }
 
     function buildRandomForestUI() {
@@ -157,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         formContainer.innerHTML = `
             <div class="control-group">
-                <label>📍 Step 1: Choose Your Location</label>
+                <label><i class="fas fa-map-marker-alt icon-label"></i> Step 1: Choose Your Location</label>
                 <p class="info-text">Click anywhere on the map to analyze historical patterns for that area.<br>
                 <strong>Selected:</strong> <span id="expert-selected-road">None</span></p>
             </div>
@@ -170,7 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div id="expert-results-content">
                     <p>Select a location and click "Find Patterns" to see its typical traffic profiles.</p>
                 </div>
-                
                 <div id="expert-chart-container" style="position: relative; height: 300px; width: 100%;">
                     <canvas id="kmeans-pie-chart"></canvas>
                 </div>
@@ -181,6 +181,9 @@ document.addEventListener('DOMContentLoaded', () => {
         predictButton.classList.remove('hidden');
         setTimeout(initializeKMeansLogic, 0);
     }
+
+
+
     function buildHybridUI() {
         console.log('buildHybridUI: start');
         title.textContent = 'Hybrid: Ultimate Accuracy Engine';
@@ -190,20 +193,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function buildStandardPredictorUI() {
-        console.log('buildStandardPredictorUI: start');
         formContainer.innerHTML = `
             <div class="control-group">
-                <label>📍 Step 1: Choose Your Location</label> <p class="info-text">Click anywhere on the map to place a pin.<br>
+                <label><i class="fas fa-map-marker-alt icon-label"></i> Step 1: Choose Your Location</label>
+                <p class="info-text">Click anywhere on the map to place a pin.<br>
                 <strong>Selected:</strong> <span id="expert-selected-road">None</span></p>
             </div>
             <div class="control-group">
-                <label>⏰ Step 2: Set Prediction Time</label>
+                <label><i class="fas fa-clock icon-label"></i> Step 2: Set Prediction Time</label>
                 <div class="button-group">
                     <button class="time-btn active">Next Hour</button>
                     <button class="time-btn">Next 3 Hours</button>
                 </div>
             </div>
         `;
+
         vizContainer.innerHTML = `
             <div id="expert-map"></div>
             <div id="expert-results-card" class="hidden">
@@ -212,7 +216,6 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
         predictButton.classList.remove('hidden');
-        console.log('buildStandardPredictorUI: done');
     }
 
 
@@ -479,40 +482,49 @@ document.addEventListener('DOMContentLoaded', () => {
      * --- THIS IS THE NEW CORE FUNCTION ---
      * Reusable function to set up dynamic map clicking
      */
+   /**
+     * --- UPDATED: Dynamic Map Click with Custom Icon ---
+     */
     function setupDynamicMapClick(map, selectedRoadText, onMarkerCreated) {
         let currentMarker = null;
 
-        map.on('click', (e) => {
-            console.log('map click event:', e.latlng);
-            const coordinates = e.latlng;
+        // 1. Define the Custom Icon
+        // This creates a marker that uses FontAwesome text instead of an image
+        const customIcon = L.divIcon({
+            className: 'custom-map-marker', // We will style this in CSS
+            html: '<div class="marker-pin"><i class="fas fa-map-marker-alt"></i></div>',
+            iconSize: [40, 42],
+            iconAnchor: [20, 42], // Point of the icon which corresponds to marker's location
+            popupAnchor: [0, -40] // Where the popup opens relative to the icon
+        });
 
-            // Save coordinates to our main selection object
+        map.on('click', (e) => {
+            const coordinates = e.latlng;
+            
+            // Save coordinates
             userSelections.coordinates = {
                 lat: coordinates.lat,
                 lng: coordinates.lng
             };
-
-            // Update the text in the control panel
+            
+            // Update text
             selectedRoadText.textContent = `Lat: ${coordinates.lat.toFixed(4)}, Lng: ${coordinates.lng.toFixed(4)}`;
 
-            // Remove the old marker if it exists
+            // Remove old marker
             if (currentMarker) {
                 map.removeLayer(currentMarker);
             }
 
-            // Add a new marker to the map
-            currentMarker = L.marker(coordinates).addTo(map)
-                .bindPopup(`Selected Location`)
+            // Add NEW custom marker
+            currentMarker = L.marker(coordinates, { icon: customIcon }).addTo(map)
+                .bindPopup(`<div style="text-align:center;"><b>Selected Location</b><br>${coordinates.lat.toFixed(4)}, ${coordinates.lng.toFixed(4)}</div>`)
                 .openPopup();
-
-            // This is a "callback" to give the new marker back to the calling function
+            
             if (onMarkerCreated) {
                 onMarkerCreated(currentMarker);
-                console.log('setupDynamicMapClick: onMarkerCreated called with ->', currentMarker.getLatLng());
             }
         });
     }
-
     /**
      * Reusable function to display XGBoost & Hybrid results
      */
