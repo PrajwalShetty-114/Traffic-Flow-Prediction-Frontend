@@ -72,12 +72,13 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('buildXGBoostUI: done');
     }
 
-    function buildLstmUI() {
-        console.log('buildLstmUI: start');
+ function buildLstmUI() {
         title.textContent = 'LSTM: Future Forecaster';
+
         formContainer.innerHTML = `
             <div class="control-group">
-                <label>📍 Step 1: Choose Your Location</label> <p class="info-text">Click anywhere on the map to place a pin.<br>
+                <label>📍 Step 1: Choose Your Location</label>
+                <p class="info-text">Click anywhere on the map to place a pin.<br>
                 <strong>Selected:</strong> <span id="expert-selected-road">None</span></p>
             </div>
             <div class="control-group">
@@ -85,18 +86,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 <input type="date" id="lstm-date-picker" class="control-group-input">
             </div>
         `;
+
         vizContainer.innerHTML = `
             <div id="expert-map"></div>
             <div id="expert-results-card" class="hidden">
                 <h3>24-Hour Forecast for <span id="expert-results-road-name"></span></h3>
                 <div id="expert-results-content">
+                    </div>
+                
+                <div id="lstm-chart-container" style="position: relative; height: 300px; width: 100%;">
                     <canvas id="lstm-line-chart"></canvas>
                 </div>
             </div>
         `;
+
         predictButton.classList.remove('hidden');
         setTimeout(initializeLstmLogic, 0);
-        console.log('buildLstmUI: done');
     }
 
     function buildCatBoostUI() {
