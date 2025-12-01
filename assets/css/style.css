@@ -884,7 +884,7 @@ h2 {
 .icon-box {
     margin-bottom: auto; /* Pushes icon to the top */
     margin-top: 2rem;
-    font-size: 9rem;
+    font-size: 8rem;
     color:whitesmoke;
     transition: transform 0.4s ease, color 0.3s ease;
     text-shadow: 0 0 20px rgba(255,255,255,0.3);
@@ -1267,3 +1267,32 @@ color: #ff6b81;
 [data-model="hybrid"] {
     background-image: url('../images/hybrid-bg.png');
 } */
+
+/* =================================================================
+   21. AI MASCOT ANIMATION
+   ================================================================= */
+
+.ai-mascot-container {
+    position: relative; /* Floats above everything */
+    /* margin-left: 25%; */
+    /* right: 20px; */
+    left: 40%;
+    z-index: 10; /* Stays on top of background but below modals */
+    pointer-events: none; /* Lets you click through it if it covers anything */
+    
+    /* Optional: Slight floaty animation */
+    animation: float-mascot 6s ease-in-out infinite;
+}
+
+@keyframes float-mascot {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Hide on mobile so it doesn't block the view */
+@media (max-width: 768px) {
+    .ai-mascot-container {
+        display: none;
+    }
+}
