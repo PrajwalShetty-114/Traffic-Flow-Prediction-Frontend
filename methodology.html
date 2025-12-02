@@ -12,6 +12,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
 <body>
@@ -27,9 +29,7 @@
                 <li><a href="https://rushradar-frontend.onrender.com">Prediction Dashboard</a></li>
                 <li><a href="modelSelection.html">Select Model</a></li>
                 <li><a href="index.html#how-it-works">How It Works</a></li>
-                <li><a href="methodology.html">About Us</a></li>
-                
-            </ul>
+                <li><a href="methodology.html" class="active">About Us</a></li> </ul>
             <div class="theme-switch-container">
                 <label class="theme-switch" for="theme-toggle">
                     <input type="checkbox" id="theme-toggle" />
@@ -64,22 +64,51 @@
             <h2>A Model for Every Task</h2>
             <div class="models-container">
                 <div class="model-card">
-                    <div class="model-icon">📊</div>
+                    <div class="model-icon-lottie">
+                        <lottie-player 
+                            src="./assets/lottie/xgboost.json" 
+                            background="transparent"
+                            speed="1" 
+                            style="width: 150px; height: 150px;" 
+                            loop 
+                            autoplay>
+                        </lottie-player>
+                    </div>
                     <h3>The Congestion Expert</h3>
                     <p>This model is a master detective, exceptionally good at looking at many complex factors to
                         determine the probability and intensity of a traffic jam. It's our go-to expert for predicting
                         <strong>congestion levels</strong>.
                     </p>
                 </div>
+
                 <div class="model-card">
-                    <div class="model-icon"> speedometer ️</div>
+                    <div class="model-icon-lottie">
+                        <lottie-player 
+                            src="./assets/lottie/randomforest.json" 
+                            background="transparent"
+                            speed="1" 
+                            style="width: 150px; height: 150px;" 
+                            loop 
+                            autoplay>
+                        </lottie-player>
+                    </div>
                     <h3>The Speed & Route Guru</h3>
                     <p>This model works like a thousand experienced local drivers, combining their "wisdom" to make a
                         reliable prediction about <strong>average vehicle speeds</strong> and identify the most
                         promising <strong>alternative routes</strong>.</p>
                 </div>
+
                 <div class="model-card">
-                    <div class="model-icon">📈</div>
+                    <div class="model-icon-lottie">
+                        <lottie-player 
+                            src="./assets/lottie/lstm.json" 
+                            background="transparent"
+                            speed="1" 
+                            style="width: 150px; height: 150px;" 
+                            loop 
+                            autoplay>
+                        </lottie-player>
+                    </div>
                     <h3>The Pattern Seeker</h3>
                     <p>This specialist is a master of time. It understands sequences and recognizes long-term patterns,
                         making it perfect for forecasting the total <strong>volume of vehicles</strong> we expect to see
@@ -110,6 +139,9 @@
             <p>A project by Group 31. Built with ❤️ in India.</p>
         </div>
     </footer>
+
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    
     <script src="assets/js/main.js"></script>
     <script src="assets/js/theme-toggle.js"></script>
 </body>

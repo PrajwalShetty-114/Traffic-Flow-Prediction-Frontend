@@ -697,9 +697,27 @@ h2 {
 
 .model-card {
     flex: 1;
-    background-color: var(--secondary-color);
-    padding: 2rem;
-    border-radius: 10px;
+    /* Glassmorphism Background */
+    background: var(--card-bg); /* Use the variables we set up earlier */
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--card-border);
+    box-shadow: 0 8px 32px 0 var(--shadow-color);
+    
+    padding: 2.5rem;
+    border-radius: 16px;
+    text-align: center; /* Center everything for a cleaner look */
+    transition: transform 0.3s ease;
+}
+
+.model-card:hover {
+    transform: translateY(-10px);
+}
+
+/* Center the Lottie animation */
+.model-icon-lottie {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
 }
 
 .model-icon {
@@ -718,24 +736,39 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    /* Allows steps to wrap onto the next line on smaller screens */
     gap: 1rem;
-    margin-top: 3rem;
+    margin-top: 4rem;
+    flex-wrap: wrap;
 }
 
 .flow-step {
-    background-color: var(--secondary-color);
-    padding: 1rem 1.5rem;
+    background: var(--secondary-color);
+    color: var(--text-color);
+    padding: 1.5rem 2rem;
     border-radius: 50px;
-    font-weight: 600;
+    font-weight: 700;
+    border: 1px solid var(--primary-color);
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.flow-step:hover {
+    transform: scale(1.1);
+    background: var(--primary-color);
+    color: #fff;
 }
 
 .flow-arrow {
     font-size: 2rem;
-    color: var(--primary-color);
+    color: var(--accent-color);
+    animation: bounceRight 1.5s infinite; /* Make arrows move! */
 }
 
+@keyframes bounceRight {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(10px); }
+}
 
 /* =================================================================
    13. METHODOLOGY RESPONSIVENESS
