@@ -560,30 +560,46 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ... (displayLstmResults, displayCatBoostResults, displayKMeansResults remain the same as before) ...
-    function displayLstmResults(forecast) {
-        console.log('displayLstmResults: called with forecast ->', forecast);
+  function displayLstmResults(forecast) {
         if (activeChart) activeChart.destroy();
         const ctx = document.getElementById('lstm-line-chart').getContext('2d');
+        
         activeChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: forecast.labels,
                 datasets: [{
-                    label: 'Predicted Congestion',
+                    label: 'Predicted Volume',
                     data: forecast.data,
                     borderColor: '#e94560',
                     backgroundColor: 'rgba(233, 69, 96, 0.2)',
                     fill: true,
-                    tension: 0.3
+                    tension: 0.4, // Smoother curve
+                    pointRadius: 2 // Smaller dots for a cleaner look
                 }]
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false, // Fits the container height
                 scales: {
-                    y: { beginAtZero: true, max: 1.2, ticks: { color: '#e4e4e4' } },
-                    x: { ticks: { color: '#e4e4e4' } }
+                    y: { 
+                        // REMOVED 'max: 1.2' and 'beginAtZero: true'
+                        // Now it will auto-scale to fit your 30,000+ data points
+                        ticks: { color: '#e4e4e4' },
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                    },
+                    x: { 
+                        ticks: { color: '#e4e4e4' },
+                        grid: { display: false } // Cleaner look
+                    }
                 },
-                plugins: { legend: { labels: { color: '#e4e4e4' } } }
+                plugins: { 
+                    legend: { labels: { color: '#e4e4e4' } },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
+                    }
+                }
             }
         });
     }
