@@ -1,4 +1,4 @@
-# 🚦 TrafficFlow AI | Intelligent Urban Mobility
+#  TrafficFlow AI | Intelligent Urban Mobility
 
 ![Project Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
@@ -9,18 +9,18 @@
 ---
 
 ## 📖 Table of Contents
-* [📍 Overview](#-overview)
-* [✨ Key Features](#-key-features)
-* [🧠 The AI Models](#-the-ai-models)
-* [🛠️ Tech Stack](#-tech-stack)
-* [🏗️ Architecture](#-architecture)
-* [📸 Screenshots](#-screenshots)
-* [🚀 Getting Started](#-getting-started)
-* [👥 The Team](#-the-team)
+* [ Overview](#-overview)
+* [ Key Features](#-key-features)
+* [ The AI Models](#-the-ai-models)
+* [ Tech Stack](#-tech-stack)
+* [ Architecture](#-architecture)
+* [ Screenshots](#-screenshots)
+* [ Getting Started](#-getting-started)
+* [ The Team](#-the-team)
 
 ---
 
-## 📍 Overview
+##  Overview
 
 **The Problem:** Urban congestion involves more than just "too many cars." It is a complex interplay of time, weather, events, and road infrastructure. Existing navigation tools often lack the context to explain *why* a jam is happening or *how* it will evolve.
 
@@ -30,13 +30,13 @@ Whether you are a daily commuter needing a quick route or a data analyst studyin
 
 ---
 
-## ✨ Key Features
+##  Key Features
 
 ### 🖥️ Two Distinct Dashboards
 * **Simple Dashboard:** A streamlined interface for commuters. Select a location -> Get instant speed & congestion predictions.
 * **Expert Dashboard:** A deep-dive interface for analysts. Visualize confidence intervals, feature importance, and historical trends.
 
-### 🎨 Modern UI/UX
+###  Modern UI/UX
 * **Glassmorphism Design:** A stunning, translucent aesthetic.
 * **Dynamic Theme:** Seamless Dark/Light mode toggling.
 * **Interactive Maps:** Powered by Leaflet.js for precise location selection.
@@ -44,7 +44,7 @@ Whether you are a daily commuter needing a quick route or a data analyst studyin
 
 ---
 
-## 🧠 The AI Models
+##  The AI Models
 
 Our "Brain" consists of 6 independent AI Experts:
 
