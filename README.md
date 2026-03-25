@@ -76,7 +76,7 @@ Our "Brain" consists of 6 independent AI Experts:
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 The system follows a **Microservices Pattern**:
 
@@ -87,7 +87,7 @@ The system follows a **Microservices Pattern**:
 
 ---
 
-## 📸 Screenshots
+##  Screenshots
 
 | Landing Page | Expert Dashboard |
 |:---:|:---:|
